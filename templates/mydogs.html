@@ -1,0 +1,18 @@
+<!doctype html>
+<title>My Dogs</title>
+<h1>My Dogs</h1>
+
+{% for dog in dogs %}
+    <article>
+        <header>
+            <div>
+                <h1>{{ dog['breed'] }}</h1>
+                <div>Discovered on {{ dog['discovered'].strftime('%Y-%m-%d') }}</div>
+            </div>
+        </header>
+        <img src="{{url_for('static', filename='images/' + dog['photo_path'])}}" alt="DOGIMAGE" width="300" height="300">
+    </article>
+    {% if not loop.last %}
+      <hr>
+    {% endif %}
+{% endfor %}
