@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}My Dogs{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    {% for dog in dogs %}
+        <article>
+            <header>
+                <div>
+                    <h1>{{ dog['breed'] }}</h1>
+                    <div>Discovered on {{ dog['discovered'].strftime('%Y-%m-%d') }}</div>
+                </div>
+            </header>
+            <img src="{{url_for('static', filename='images/' + dog['photo_path'])}}" alt="DOGIMAGE" width="300" height="300">
+        </article>
+        {% if not loop.last %}
+        <hr>
+        {% endif %}
+    {% endfor %}
+{% endblock %}
