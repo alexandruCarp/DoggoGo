@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block header %}
+  <h1>{% block title %}Welcome{% endblock %}</h1>
+{% endblock %}
+
+{% block content %}
+    {% if g.user %}
+    <p>Welcome, {{g.user['username']}}!</p>
+    <a href="{{ url_for('mydogs.mydogs') }}">My Dogs</a>
+    <br>
+    <a href="{{ url_for('upload.upload') }}">Find a new dog</a>
+    {% else %}
+    <p>Welcome to DoggoGo. Please <a href="{{ url_for('login.login') }}">login</a>
+         or <a href="{{ url_for('register.register') }}">register</a> to continue.</p>
+    {% endif %}
+{% endblock %}
