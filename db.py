@@ -7,19 +7,19 @@ def init_db():
     db.executescript(f.read())
 
     ###pentru testare
-    db.execute(
-        "INSERT INTO dog (breed, photo_path) VALUES (?, ?)",
-        ("maidanez","maidanez.jpeg"),
-    )
-    db.execute(
-        "INSERT INTO dog (breed, photo_path) VALUES (?, ?)",
-        ("bichon","bichon.jpg"),
-    )
-    db.execute(
-        "INSERT INTO dog (breed, photo_path) VALUES (?, ?)",
-        ("caine","caine.jpeg"),
-    )
-    db.commit()
+    # db.execute(
+    #     "INSERT INTO dog (breed, photo_path) VALUES (?, ?)",
+    #     ("maidanez","maidanez.jpeg"),
+    # )
+    # db.execute(
+    #     "INSERT INTO dog (breed, photo_path) VALUES (?, ?)",
+    #     ("bichon","bichon.jpg"),
+    # )
+    # db.execute(
+    #     "INSERT INTO dog (breed, photo_path) VALUES (?, ?)",
+    #     ("caine","caine.jpeg"),
+    # )
+    # db.commit()
     ###
 
 def get_db():

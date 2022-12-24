@@ -2,10 +2,15 @@
 
 {% block header %}
   <h1>{% block title %}My Dogs{% endblock %}</h1>
+  {% if g.user %}
+    <a class="action" href="{{ url_for('upload.upload') }}">Add another dog</a>
+  {% endif %}
 {% endblock %}
+
 
 {% block content %}
     {% for dog in dogs %}
+        {% if g.user['id'] == dog['user_id'] %}
         <article>
             <header>
                 <div>
@@ -17,6 +22,7 @@
         </article>
         {% if not loop.last %}
         <hr>
+        {% endif %}
         {% endif %}
     {% endfor %}
 {% endblock %}
