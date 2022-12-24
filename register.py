@@ -39,3 +39,4 @@ def register():
         flash(error)
 
     return render_template("register.html",error = error)
+

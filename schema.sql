@@ -1,6 +1,7 @@
 DROP TABLE IF EXISTS dog;
 DROP TABLE IF EXISTS user;
 
+
 CREATE TABLE dog (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     breed TEXT NOT NULL,
@@ -11,8 +12,6 @@ CREATE TABLE dog (
     -- user_id INTEGER NOT NULL,
     -- FOREIGN KEY (user_id) REFERENCES user (id)
 );
-
--- TODO table user
 
 CREATE TABLE user(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
