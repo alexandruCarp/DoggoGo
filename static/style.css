@@ -1,17 +1,17 @@
 html {
     font-family: sans-serif;
-    background: rgb(255, 229, 185);
+    background: #17252A;
     padding: 1rem;
   }
   
   body {
     margin: 0 auto;
-    background: white;
+    background: #FEFFFF ;
   }
   
   h1, h2, h3, h4, h5, h6 {
     font-family: serif;
-    color: #0f0f2c;
+    color: #3AAFA9;
     margin: 1rem 0;
   }
   
@@ -37,7 +37,7 @@ html {
   }
   
   nav h1 a {
-    color:#911a1acd;
+    color:#2B7A78;
     font-family: monospace;
     font-size: 30px;
     text-decoration: none;
