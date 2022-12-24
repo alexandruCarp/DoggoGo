@@ -1,28 +1,48 @@
+import os
 from flask import Blueprint
+from flask import flash
+from flask import g
+from flask import redirect
 from flask import render_template
+from flask import request
+from flask import url_for
+from werkzeug.utils import secure_filename
+from db import get_db
+
 
 bp = Blueprint("upload",__name__)
 
-@bp.route('/create', methods=('GET', 'POST'))
-def create():
+@bp.route('/upload', methods=('GET', 'POST'))
+def upload():
     if request.method == 'POST':
-        title = request.form['title']
-        body = request.form['body']
+        print(0)
+        if 'file' not in request.files:
+            return redirect(request.url)
+        print(1)
+        file = request.files['file']
+        print(2)
+        dog_breed = request.form['dog_breed']
+        print(3)
         error = None
 
-        if not title:
-            error = 'Title is required.'
+        if not file:
+            error = 'Image is required.'
+        else:
+            filename = secure_filename(file.filename)
+            file.save(os.path.join("./static/images/", filename))
+            photo_path = filename
 
         if error is not None:
             flash(error)
+
         else:
             db = get_db()
             db.execute(
                 'INSERT INTO dog (breed, photo_path, user_id)'
                 ' VALUES (?, ?, ?)',
-                (title, body, g.user['user_id'])
+                (dog_breed, photo_path, g.user['id'])
             )
             db.commit()
-            return redirect(url_for('app.home'))
+            return redirect(url_for('mydogs.mydogs'))
 
     return render_template('upload.html')
