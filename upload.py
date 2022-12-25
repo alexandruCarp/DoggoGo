@@ -46,3 +46,17 @@ def upload():
             return redirect(url_for('mydogs.mydogs'))
 
     return render_template('upload.html')
+
+@bp.route('/<id>/<file>/delete_pic', methods=('GET', 'POST'))
+def delete_pic(id, file):
+    db = get_db()
+    filename='static/images/' + file
+
+    os.remove(filename)
+    db.execute(
+        'DELETE FROM dog'
+        ' WHERE id=?',
+        (id, )
+    )
+    db.commit()
+    return redirect(url_for('mydogs.mydogs'))
