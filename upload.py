@@ -9,11 +9,17 @@ from flask import url_for
 from werkzeug.utils import secure_filename
 from db import get_db
 
+ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 bp = Blueprint("upload",__name__)
 
 @bp.route('/upload', methods=('GET', 'POST'))
 def upload():
+    error = None
     if request.method == 'POST':
         print(0)
         if 'file' not in request.files:
@@ -23,10 +29,9 @@ def upload():
         print(2)
         dog_breed = request.form['dog_breed']
         print(3)
-        error = None
 
-        if not file:
-            error = 'Image is required.'
+        if not file or not allowed_file(file.filename):
+            error = 'Image is required.\n' + 'Allowed extensions are:' + str(ALLOWED_EXTENSIONS)
         else:
             filename = secure_filename(file.filename)
             file.save(os.path.join("./static/images/", filename))
@@ -45,7 +50,7 @@ def upload():
             db.commit()
             return redirect(url_for('mydogs.mydogs'))
 
-    return render_template('upload.html')
+    return render_template('upload.html', error = error)
 
 @bp.route('/<id>/<file>/delete_pic', methods=('GET', 'POST'))
 def delete_pic(id, file):
