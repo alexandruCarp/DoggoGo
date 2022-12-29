@@ -19,6 +19,14 @@
                 </div>
             </header>
             <img src="{{url_for('static', filename='images/' + dog['photo_path'])}}" alt="DOGIMAGE" width="300" height="300">
+
+            <style>
+            h2{text-align: right;}
+            </style>
+            <h2>
+                <a class="action" href="{{ url_for('upload.delete_pic', id=dog['id'], file=dog['photo_path']) }}">Delete dog</a>
+            </h2>
+            
         </article>
         {% if not loop.last %}
         <hr>
