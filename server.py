@@ -22,6 +22,8 @@ app.register_blueprint(upload.bp)
 
 if __name__ == "__main__":
     if len(argv) > 1 and argv[1] == "--init":
+        for file in os.listdir("static/images"):
+            os.remove("static/images/" + file)
         db.init_db()
     
     app.run(host="0.0.0.0", port=3000)

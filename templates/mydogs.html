@@ -10,7 +10,6 @@
 
 {% block content %}
     {% for dog in dogs %}
-        {% if g.user['id'] == dog['user_id'] %}
         <article>
             <header>
                 <div>
@@ -30,7 +29,6 @@
         </article>
         {% if not loop.last %}
         <hr>
-        {% endif %}
         {% endif %}
     {% endfor %}
 {% endblock %}

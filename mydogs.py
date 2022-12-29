@@ -13,6 +13,8 @@ def mydogs():
     dogs = db.execute(
         "SELECT *"
         " FROM dog"
-        " ORDER BY discovered DESC"
-    ).fetchall()                   # trebuie selectati doar cainii userului curent - de modificat cand avem user
+        " WHERE user_id= ? "
+        " ORDER BY discovered DESC",
+        (g.user["id"],)
+    ).fetchall()
     return render_template("mydogs.html", dogs=dogs)
