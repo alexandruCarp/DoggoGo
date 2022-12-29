@@ -8,6 +8,7 @@ from flask import request
 from flask import url_for
 from werkzeug.utils import secure_filename
 from db import get_db
+from login import login_required
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
@@ -18,6 +19,7 @@ def allowed_file(filename):
 bp = Blueprint("upload",__name__)
 
 @bp.route('/upload', methods=('GET', 'POST'))
+@login_required
 def upload():
     error = None
     if request.method == 'POST':
@@ -53,6 +55,7 @@ def upload():
     return render_template('upload.html', error = error)
 
 @bp.route('/<id>/<file>/delete_pic', methods=('GET', 'POST'))
+@login_required
 def delete_pic(id, file):
     db = get_db()
     filename='static/images/' + file
