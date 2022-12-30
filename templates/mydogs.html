@@ -14,7 +14,7 @@
             <header>
                 <div>
                     <h1>{{ dog['breed'] }}</h1>
-                    <div>Discovered on {{ dog['discovered'].strftime('%Y-%m-%d') }}</div>
+                    <div>Discovered on {{ dog['discovered'].strftime('%y-%b-%d, %H:%M') }}</div>
                 </div>
             </header>
             <img src="{{url_for('static', filename='images/' + dog['photo_path'])}}" alt="DOGIMAGE" width="300" height="300">

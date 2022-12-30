@@ -14,4 +14,22 @@
     <p>Welcome to DoggoGo. Please <a href="{{ url_for('login.login') }}">login</a>
          or <a href="{{ url_for('register.register') }}">register</a> to continue.</p>
     {% endif %}
+    {% if discoveries %}
+    <hr>
+    <h1>Latest discoveries</h1>
+    <div class="row">
+      {% for disc in discoveries %}
+        <div class="column">
+          <div class="card">
+            <img src="{{url_for('static', filename='images/' + disc['photo_path'])}}" alt="DOG" width="300" height="300">
+            <div class="container">
+              <h4><b>{{disc['breed']}}</b></h4>
+              <p>Discovered on {{ disc['discovered'].strftime('%y-%b-%d, %H:%M') }}</p>
+              <p>by {{users[disc['user_id']]['username']}}</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+    {% endif %}
 {% endblock %}

@@ -134,4 +134,36 @@ html {
     align-self: start;
     min-width: 10em;
   }
+
+  .row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 10px;
+  }
   
+  .column {
+    padding: 0 10px;
+  }
+  .card {
+    /* Add shadows to create the "card" effect */
+    width: fit-content;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    float: none;
+    text-align: center;
+    border-radius: 10px;
+  }
+
+  .card img {
+    border-radius: 10px 10px 0 0;
+  }
+  
+  /* On mouse-over, add a deeper shadow */
+  .card:hover {
+    box-shadow: 0 8px 16px 0 #17252A;
+  }
+  
+  /* Add some padding inside the card container */
+  .container {
+    padding: 2px 16px;
+  }
