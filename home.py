@@ -23,4 +23,20 @@ def home():
             (disc['user_id'],)
         ).fetchall()[0]
 
-    return render_template("home.html", discoveries=discoveries, users=users)
+    leaders=[]
+    all_users = db.execute(
+        " SELECT * "
+        " FROM user "
+    )
+    for user in all_users:
+        dogs_no = db.execute(
+            " SELECT COUNT(*) "
+            " FROM dog "
+            " WHERE user_id = ? ",
+            (user['id'],)
+        ).fetchone()[0]
+        leaders.append((user,dogs_no))
+    leaders.sort(key=lambda a: a[1], reverse=True)
+    if len(leaders) > 5:
+        leaders = leaders[0:5]
+    return render_template("home.html", discoveries=discoveries, users=users, leaders=leaders)

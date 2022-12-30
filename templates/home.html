@@ -15,8 +15,8 @@
          or <a href="{{ url_for('register.register') }}">register</a> to continue.</p>
     {% endif %}
     {% if discoveries %}
-    <hr>
     <h1>Latest discoveries</h1>
+    <hr>
     <div class="row">
       {% for disc in discoveries %}
         <div class="column">
@@ -31,5 +31,27 @@
         </div>
       {% endfor %}
     </div>
+    {% endif %}
+    {% if leaders %}
+    <h1>Leaderboard</h1>
+    <hr>
+    <table>
+      <thead>
+      <tr>
+        <th>Rank</th>
+        <th>User</th>
+        <th>Number of dogs discovered</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for leader in leaders %}
+      <tr>
+        <td>{{leaders.index(leader) + 1}}</td>
+        <td>{{leader[0]['username']}}</td>
+        <td>{{leader[1]}}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+    </table>
     {% endif %}
 {% endblock %}
