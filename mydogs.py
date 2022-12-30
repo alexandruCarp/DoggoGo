@@ -3,16 +3,20 @@ from flask import g
 from db import get_db
 from flask import render_template
 
+from login import login_required
+
 bp = Blueprint("mydogs",__name__)
 
 @bp.route("/mydogs")
-#eventual @login_required
+@login_required
 def mydogs():
     db = get_db()
     db.commit()
     dogs = db.execute(
         "SELECT *"
         " FROM dog"
-        " ORDER BY discovered DESC"
-    ).fetchall()                   # trebuie selectati doar cainii userului curent - de modificat cand avem user
+        " WHERE user_id= ? "
+        " ORDER BY discovered DESC",
+        (g.user["id"],)
+    ).fetchall()
     return render_template("mydogs.html", dogs=dogs)

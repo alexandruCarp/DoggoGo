@@ -1,3 +1,4 @@
+import functools
 from flask import Blueprint
 from flask import flash
 from flask import g
@@ -12,6 +13,16 @@ from werkzeug.security import generate_password_hash
 
 bp = Blueprint("login",__name__)
 
+def login_required(view):
+
+    @functools.wraps(view)
+    def wrapped_view(**kwargs):
+        if g.user is None:
+            return redirect(url_for("home.home"))
+
+        return view(**kwargs)
+
+    return wrapped_view
 
 @bp.before_app_request
 def load_logged_in_user():
