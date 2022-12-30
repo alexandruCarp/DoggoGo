@@ -1,4 +1,3 @@
-#TechVidvan load all required libraries
 import cv2
 import numpy as np 
 import pandas as pd 
@@ -151,5 +150,3 @@ def breed_identification(path):
     pred_breed = sorted(new_list)[np.argmax(pred_val)]
     print("Predicted Breed for this Dog is :",pred_breed)
     return pred_breed
-
-#https://techvidvan.com/tutorials/dog-breed-classification/
