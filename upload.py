@@ -9,6 +9,7 @@ from flask import url_for
 from werkzeug.utils import secure_filename
 from db import get_db
 from login import login_required
+from dog_breed_identification import breed_identification
 
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg'}
 
@@ -29,7 +30,7 @@ def upload():
         print(1)
         file = request.files['file']
         print(2)
-        dog_breed = request.form['dog_breed']
+        # dog_breed = request.form['dog_breed']
         print(3)
 
         if not file or not allowed_file(file.filename):
@@ -43,6 +44,7 @@ def upload():
             flash(error)
 
         else:
+            dog_breed = breed_identification(os.path.join("./static/images/", photo_path))
             db = get_db()
             db.execute(
                 'INSERT INTO dog (breed, photo_path, user_id)'
