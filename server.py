@@ -7,6 +7,7 @@ import home
 import login
 import register
 import upload
+from dog_breed_identification import init_ml
 
 app = Flask(__name__)
 app.secret_key = 'dev'
@@ -25,5 +26,5 @@ if __name__ == "__main__":
         for file in os.listdir("static/images"):
             os.remove("static/images/" + file)
         db.init_db()
-    
+    init_ml()
     app.run(host="0.0.0.0", port=3000)
